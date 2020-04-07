@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "github.com/cigarframework/cigar/pkg/proto";
+package proto;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.goproto_getters_all) = true;
+option (gogoproto.gostring_all) = true;
+
+message Echo {
+    string Message = 1;
+}
+
+service EchoService {
+    rpc Get (Echo) returns (Echo) {
+    }
+    rpc StreamResponse (Echo) returns (stream Echo) {
+    }
+    rpc BinaryStream (stream Echo) returns (stream Echo) {
+    }
+    rpc StreamRequest (stream Echo) returns (Echo) {
+    }
+}

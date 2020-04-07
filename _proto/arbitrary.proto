@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "github.com/cigarframework/cigar/pkg/proto";
+package proto;
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.goproto_getters_all) = true;
+option (gogoproto.gostring_all) = true;
+
+message ArbitraryRequest {
+    string Method = 1;
+    string Body = 2;
+}
+
+message ArbitraryResponse {
+    string Body = 1;
+}
+
+service ArbitraryService {
+    rpc Unary (ArbitraryRequest) returns (ArbitraryResponse) {
+    }
+
+    rpc BiStream (stream ArbitraryRequest) returns (stream ArbitraryResponse) {
+    }
+
+    rpc ClientStream (stream ArbitraryRequest) returns (ArbitraryResponse) {
+    }
+
+    rpc ServerStream (ArbitraryRequest) returns (stream ArbitraryResponse) {
+    }
+}
